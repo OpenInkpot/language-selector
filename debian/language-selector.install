@@ -1,1 +1,3 @@
-usr/bin/language-selector
+etc/X11/Xsession.d/*
+usr/bin/*
+usr/share/language-selector
