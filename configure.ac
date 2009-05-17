@@ -13,4 +13,4 @@ PKG_CHECK_MODULES(EDJE,[edje])
 PKG_CHECK_MODULES(ECHOICEBOX,[echoicebox])
 PKG_CHECK_MODULES(LIBLANGUAGE,[language])
 
-AC_OUTPUT(Makefile src/Makefile)
+AC_OUTPUT(Makefile src/Makefile themes/Makefile)
