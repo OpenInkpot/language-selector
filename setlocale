@@ -11,6 +11,6 @@ fi
 for i in $LC_COLLATE $LC_CTYPE $LC_MONETARY $LC_MESSAGES \
          $LC_NUMERIC $LC_TIME $LC_ALL $LANGUAGE; do
     if ! [ -d /usr/lib/locale/$i ]; then
-        genlocale $i
+        genlocale ${i%.UTF-8}
     fi
 done
