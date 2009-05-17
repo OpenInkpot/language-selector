@@ -116,8 +116,9 @@ static void key_down(void* param, Evas* e, Evas_Object* o, void* event_info)
         choicebox_prevpage(r);
     if(!strcmp(ev->keyname, "Right"))
         choicebox_nextpage(r);
-    if((ev->keyname[0] >= '1') && (ev->keyname[0] <= '9') && !ev->keyname[1])
-        choicebox_activate_nth_visible(r, ev->keyname[0] - '1', false);
+    if(!strncmp(ev->keyname, "KP_", 3)
+       && (ev->keyname[3] >= '1') && (ev->keyname[3] <= '9') && !ev->keyname[4])
+        choicebox_activate_nth_visible(r, ev->keyname[3] - '1', false);
     if(!strcmp(ev->keyname, "Return"))
         choicebox_activate_current(r, false);
     if(!strcmp(ev->keyname, "Escape"))
