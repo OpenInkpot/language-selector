@@ -72,7 +72,7 @@ static void item_handler(Evas_Object* choicebox, int item_num, bool is_alt,
     languages_t* languages = param;
     language_t* lang = languages->langs + item_num;
 
-    set_language(lang->internal_name, false);
+    set_language(languages, lang->internal_name);
 
     ecore_main_loop_quit();
 }
