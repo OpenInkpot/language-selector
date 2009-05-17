@@ -36,6 +36,10 @@ static void main_win_close_handler(Ecore_Evas* main_win)
 /* FIXME */
 #define BUFSIZE 512
 
+/* FIXME */
+const int header_h = 49;
+const int footer_h = 49;
+
 static void draw_handler(Evas_Object* choicebox, Evas_Object* item,
                          int item_num, int page_position, void* param)
 {
@@ -86,10 +90,6 @@ static void main_win_resize_handler(Ecore_Evas* main_win)
    Evas_Object* bg = evas_object_name_find(canvas, "bg");
    evas_object_resize(bg, w, h);
 
-   /* FIXME */
-   int header_h = 49;
-   int footer_h = 49;
-
    Evas_Object* header = evas_object_name_find(canvas, "header");
    evas_object_move(header, 0, 0);
    evas_object_resize(header, w, header_h);
@@ -116,8 +116,9 @@ static void key_down(void* param, Evas* e, Evas_Object* o, void* event_info)
         choicebox_prevpage(r);
     if(!strcmp(ev->keyname, "Right"))
         choicebox_nextpage(r);
-    if((ev->keyname[0] >= '1') && (ev->keyname[0] <= '9') && !ev->keyname[1])
-        choicebox_activate_nth_visible(r, ev->keyname[0] - '1', false);
+    if(!strncmp(ev->keyname, "KP_", 3)
+       && (ev->keyname[3] >= '1') && (ev->keyname[3] <= '9') && !ev->keyname[4])
+        choicebox_activate_nth_visible(r, ev->keyname[3] - '1', false);
     if(!strcmp(ev->keyname, "Return"))
         choicebox_activate_current(r, false);
     if(!strcmp(ev->keyname, "Escape"))
@@ -139,21 +140,25 @@ static void run(languages_t* languages)
    Evas_Object* bg = evas_object_rectangle_add(main_canvas);
    evas_object_name_set(bg, "bg");
    evas_object_color_set(bg, 255, 255, 255, 255);
+   evas_object_move(bg, 0, 0);
+   evas_object_resize(bg, 600, 800);
    evas_object_show(bg);
 
-   /* FIXME */
    Evas_Object* header = edje_object_add(main_canvas);
    evas_object_name_set(header, "header");
    edje_object_file_set(header, "/usr/share/language-selector/language-selector.edj",
                         "header");
    edje_object_part_text_set(header, "text", "Select language");
+   evas_object_move(header, 0, 0);
+   evas_object_resize(header, 600, header_h);
    evas_object_show(header);
 
-   /* FIXME */
    Evas_Object* footer = edje_object_add(main_canvas);
    evas_object_name_set(footer, "footer");
    edje_object_file_set(footer, "/usr/share/language-selector/language-selector.edj",
                         "footer");
+   evas_object_move(footer, 0, 800 - footer_h);
+   evas_object_resize(footer, 600, footer_h);
    evas_object_show(footer);
 
    Evas_Object* choicebox = choicebox_new(main_canvas, "/usr/share/echoicebox/echoicebox.edj",
@@ -162,6 +167,8 @@ static void run(languages_t* languages)
 
    choicebox_set_size(choicebox, languages->n);
    evas_object_name_set(choicebox, "choicebox");
+   evas_object_move(choicebox, 0, header_h);
+   evas_object_resize(choicebox, 600, 800 - header_h - footer_h);
    evas_object_show(choicebox);
 
    evas_object_focus_set(choicebox, true);

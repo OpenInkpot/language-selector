@@ -1,0 +1,14 @@
+#!/bin/sh
+# This file is sourced by Xsession.
+
+if [ ! -e $HOME/.locale ]; then
+    if [ ! -e /etc/default/locale ]; then
+        echo "No locale file found. Launching language-selector."
+        language-selector
+        if ! [ -e $HOME/.locale ]; then
+            echo "Unable to setup language."
+        fi
+    fi
+fi
+
+setlocale
