@@ -48,7 +48,7 @@ static void draw_handler(Evas_Object* choicebox, Evas_Object* item,
     else
         strncpy(buf, lang->name, BUFSIZE);
 
-    edje_object_part_text_set(item, "item/value", buf);
+    edje_object_part_text_set(item, "text", buf);
 }
 
 static void page_handler(Evas_Object* choicebox, int cur_page, int total_pages,
@@ -63,7 +63,7 @@ static void page_handler(Evas_Object* choicebox, int cur_page, int total_pages,
     Evas* canvas = evas_object_evas_get(choicebox);
     Evas_Object* footer = evas_object_name_find(canvas, "footer");
 
-    edje_object_part_text_set(footer, "choicebox/footer/text", buf);
+    edje_object_part_text_set(footer, "text", buf);
 }
 
 static void item_handler(Evas_Object* choicebox, int item_num, bool is_alt,
@@ -144,20 +144,20 @@ static void run(languages_t* languages)
    /* FIXME */
    Evas_Object* header = edje_object_add(main_canvas);
    evas_object_name_set(header, "header");
-   edje_object_file_set(header, "/home/dottedmag/openinkpot/gm/themes/gm.edj", "choicebox/header");
-   edje_object_part_text_set(header, "choicebox/header/text", "Select language");
+   edje_object_file_set(header, "/usr/share/language-selector/language-selector.edj",
+                        "header");
+   edje_object_part_text_set(header, "text", "Select language");
    evas_object_show(header);
 
    /* FIXME */
    Evas_Object* footer = edje_object_add(main_canvas);
    evas_object_name_set(footer, "footer");
-   edje_object_file_set(footer, "/home/dottedmag/openinkpot/gm/themes/gm.edj", "choicebox/footer");
-   edje_object_part_text_set(footer, "choicebox/footer/text", "?");
+   edje_object_file_set(footer, "/usr/share/language-selector/language-selector.edj",
+                        "footer");
    evas_object_show(footer);
 
-   /* FIXME */
-   Evas_Object* choicebox = choicebox_new(main_canvas, "/home/dottedmag/openinkpot/gm/themes/gm.edj",
-                                          "settings/item", item_handler,
+   Evas_Object* choicebox = choicebox_new(main_canvas, "/usr/share/echoicebox/echoicebox.edj",
+                                          "full", item_handler,
                                           draw_handler, page_handler, languages);
 
    choicebox_set_size(choicebox, languages->n);
@@ -167,7 +167,7 @@ static void run(languages_t* languages)
    evas_object_focus_set(choicebox, true);
    evas_object_event_callback_add(choicebox, EVAS_CALLBACK_KEY_DOWN, &key_down, NULL);
 
-ecore_evas_callback_resize_set(main_win, main_win_resize_handler);
+   ecore_evas_callback_resize_set(main_win, main_win_resize_handler);
 
    ecore_evas_show(main_win);
 
