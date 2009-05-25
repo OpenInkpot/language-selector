@@ -125,6 +125,11 @@ static void key_down(void* param, Evas* e, Evas_Object* o, void* event_info)
         ecore_main_loop_quit();
 }
 
+static void exit_app(void* param)
+{
+    ecore_main_loop_quit();
+}
+
 static void run(languages_t* languages)
 {
    ecore_event_handler_add(ECORE_EVENT_SIGNAL_EXIT, exit_handler, NULL);
@@ -177,6 +182,8 @@ static void run(languages_t* languages)
    ecore_evas_callback_resize_set(main_win, main_win_resize_handler);
 
    ecore_evas_show(main_win);
+
+   ecore_x_io_handler_set(exit_app, NULL);
 
    ecore_main_loop_begin();
 }
