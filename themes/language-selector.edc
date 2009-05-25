@@ -42,7 +42,7 @@ collections {
                   text {
                      text, "path";
                      font, "serif";
-                     size, 20;
+                     size, 28;
                      align, 0.0 0.5;
                   }
                   rel1 {
