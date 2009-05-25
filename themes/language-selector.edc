@@ -1,6 +1,6 @@
 collections {
     group {
-        name, "header";
+        name, "main_window";
         parts {
             part {
                 name, "background";
@@ -14,62 +14,68 @@ collections {
                 }
             }
             part {
-                name, "text";
-                type, TEXT;
-                mouse_events, 0;
-                description {
-                    state, "default" 0.0;
-                    color, 255 255 255 255;
-                    text {
-                        align, 0.0 0.5;
-                        text, "omg, somebody forgot to set the text!!!!11oneone";
-                        font, "serif";
-                        size, 30;
-                        text_class, "chrome";
-                    }
-                    rel1 { relative, 0.0 0.0; offset, 17 0; }
-                    rel2 { relative, 1.0 1.0;offset, -17 -1; }
-                }
-            }
-        }
-        data {
-            /* HACK: until edje fetches size_hints */
-            item, "min_height" "49";
-        }
-    }
-    group {
-        name, "footer";
-        parts {
-            part {
-                name, "background";
-                type, RECT;
-                mouse_events, 0;
-                description {
-                    state, "default" 0.0;
-                    color, 0 0 0 255;
-                    rel1 { relative, 0.0 0.0; offset, 0 0; }
-                    rel2 { relative, 1.0 1.0; offset, -1 -1; }
-                }
+               name, "contents-background";
+               type, RECT;
+               mouse_events, 0;
+               description {
+                  state, "default" 0.0;
+                  color, 255 255 255 255;
+                  rel1 { relative, 0.0 0.0; offset, 0 49; }
+                  rel2 { relative, 1.0 1.0; offset, -1 -50; }
+               }
             }
             part {
-                name, "text";
-                type, TEXT;
-                mouse_events, 0;
-                description {
-                    state, "default" 0.0;
-                    color, 255 255 255 255;
-                    text {
-                        text, "omg, somebody forgot to set the text!!!!11oneone";
-                        font, "serif";
-                        size, 12;
-                        text_class, "chrome";
-                    }
-                }
+               name, "contents";
+               type, SWALLOW;
+               description {
+                  state, "default" 0.0;
+                  rel1 { relative, 0.0 0.0; offset, 0 49; }
+                  rel2 { relative, 1.0 1.0; offset, -1 -50; }
+               }
             }
-        }
-        data {
-            /* HACK: until edje fetches size_hints */
-            item, "min_height" "49";
+            part {
+               name, "title";
+               type, TEXT;
+               description {
+                  state, "default" 0.0;
+                  color, 255 255 255 255;
+                  text {
+                     text, "path";
+                     font, "serif";
+                     size, 20;
+                     align, 0.0 0.5;
+                  }
+                  rel1 {
+                     relative, 0.0 0.0;
+                     offset, 5 0;
+                  }
+                  rel2 {
+                     relative, 1.0 0.0;
+                     offset, -1 49;
+                  }
+               }
+            }
+            part {
+               name, "footer";
+               type, TEXT;
+               description {
+                  state, "default" 0.0;
+                  color, 255 255 255 255;
+                  text {
+                     text, "footer";
+                     font, "serif";
+                     size, 28;
+                  }
+                  rel1 {
+                     relative, 0.0 1.0;
+                     offset, 0 -49;
+                  }
+                  rel2 {
+                     relative, 1.0 1.0;
+                     offset, -1 -1;
+                  }
+               }
+            }
         }
     }
 }
