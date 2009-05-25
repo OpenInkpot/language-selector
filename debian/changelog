@@ -1,3 +1,9 @@
+language-selector (0.1-7) asimov; urgency=low
+
+  * Theme adjusted.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Tue, 26 May 2009 03:43:48 +0700
+
 language-selector (0.1-6) asimov; urgency=low
 
   * language-selector redone with edje instead of manual widgets
