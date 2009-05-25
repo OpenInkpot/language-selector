@@ -1,3 +1,10 @@
+language-selector (0.1-5) asimov; urgency=low
+
+  * Added missing pkg-config check.
+  * Added "X connection lost" handler.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Tue, 26 May 2009 01:49:49 +0700
+
 language-selector (0.1-4) asimov; urgency=low
 
   * Fixed genlocale invocation in setlocale script.
