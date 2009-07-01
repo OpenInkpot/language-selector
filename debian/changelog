@@ -1,3 +1,9 @@
+language-selector (0.1-8) asimov; urgency=low
+
+  * Theme adjusted: using sans-serif instead of serif.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Thu, 02 Jul 2009 05:58:57 +0700
+
 language-selector (0.1-7) asimov; urgency=low
 
   * Theme adjusted.
