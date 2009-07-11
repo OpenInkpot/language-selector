@@ -13,8 +13,8 @@
 #include <Edje.h>
 
 #include <echoicebox.h>
-
 #include <language.h>
+#include <eoi.h>
 
 static void die(const char* fmt, ...)
 {
@@ -103,16 +103,14 @@ static void run(languages_t* languages)
    ecore_event_handler_add(ECORE_EVENT_SIGNAL_EXIT, exit_handler, NULL);
 
    Ecore_Evas* main_win = ecore_evas_software_x11_new(0, 0, 0, 0, 600, 800);
-   ecore_evas_title_set(main_win, "Language selector");
+   ecore_evas_title_set(main_win, "Language Selector");
    ecore_evas_name_class_set(main_win, "language-selector", "language-selector");
 
    Evas* main_canvas = ecore_evas_get(main_win);
 
    ecore_evas_callback_delete_request_set(main_win, main_win_close_handler);
 
-   Evas_Object* main_edje = edje_object_add(main_canvas);
-   edje_object_file_set(main_edje, "/usr/share/language-selector/language-selector.edj",
-                         "main_window");
+   Evas_Object* main_edje = eoi_main_window_create(main_canvas);
 
    evas_object_name_set(main_edje, "main_edje");
    edje_object_part_text_set(main_edje, "title", "Select language");

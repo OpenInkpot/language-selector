@@ -1,4 +1,4 @@
-SUBDIRS = src themes
+SUBDIRS = src
 
 bin_SCRIPTS = setlocale
 

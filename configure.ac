@@ -7,12 +7,7 @@ AC_PROG_CC
 
 PKG_PROG_PKG_CONFIG
 
-PKG_CHECK_MODULES(ECORE,[ecore])
-PKG_CHECK_MODULES(ECORE_FILE,[ecore-file])
-PKG_CHECK_MODULES(ECORE_EVAS,[ecore-evas])
-PKG_CHECK_MODULES(EVAS,[evas])
-PKG_CHECK_MODULES(EDJE,[edje])
-PKG_CHECK_MODULES(ECHOICEBOX,[echoicebox])
-PKG_CHECK_MODULES(LIBLANGUAGE,[language])
+PKG_CHECK_MODULES(EFL,[ecore ecore-file ecore-evas evas edje])
+PKG_CHECK_MODULES(OI,[echoicebox language eoi])
 
-AC_OUTPUT(Makefile src/Makefile themes/Makefile)
+AC_OUTPUT(Makefile src/Makefile)
