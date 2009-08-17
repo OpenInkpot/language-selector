@@ -1,6 +1,6 @@
-language-selector (0.1-9+b1) asimov; urgency=low
+language-selector (0.1-10) asimov; urgency=low
 
-  * Rebuild due to EFL update
+  * Stop packaging /usr/share/language-selector, it is not used anymore.
 
  -- Mikhail Gusarov <dottedmag@dottedmag.net>  Tue, 18 Aug 2009 03:04:05 +0700
 
