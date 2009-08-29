@@ -84,8 +84,6 @@ static void close_handler(Evas_Object* choicebox, void* param)
 
 static void run(languages_t* languages)
 {
-    keys_t* keys = keys_alloc("language-selector");
-
    ecore_event_handler_add(ECORE_EVENT_SIGNAL_EXIT, exit_handler, NULL);
 
    Ecore_Evas* main_win = ecore_evas_software_x11_new(0, 0, 0, 0, 600, 800);
@@ -133,8 +131,6 @@ static void run(languages_t* languages)
    ecore_x_io_error_handler_set(exit_app, NULL);
 
    ecore_main_loop_begin();
-
-   keys_free(keys);
 }
 
 int main(int argc, char** argv)
