@@ -8,6 +8,6 @@ AC_PROG_CC
 PKG_PROG_PKG_CONFIG
 
 PKG_CHECK_MODULES(EFL,[ecore ecore-file ecore-evas evas edje])
-PKG_CHECK_MODULES(OI,[echoicebox language eoi])
+PKG_CHECK_MODULES(OI,[libchoicebox language eoi])
 
 AC_OUTPUT(Makefile src/Makefile)

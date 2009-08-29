@@ -12,7 +12,7 @@
 #include <Ecore_X.h>
 #include <Edje.h>
 
-#include <echoicebox.h>
+#include <libchoicebox.h>
 #include <language.h>
 #include <eoi.h>
 
@@ -77,29 +77,15 @@ static void item_handler(Evas_Object* choicebox, int item_num, bool is_alt,
     ecore_main_loop_quit();
 }
 
-static void main_win_resize_handler(Ecore_Evas* main_win)
+static void close_handler(Evas_Object* choicebox, void* param)
 {
-   Evas* canvas = ecore_evas_get(main_win);
-   int w, h;
-   evas_output_size_get(canvas, &w, &h);
-
-   Evas_Object* main_edje = evas_object_name_find(canvas, "main_edje");
-   evas_object_resize(main_edje, w, h);
-}
-
-static void key_down(void* param, Evas* e, Evas_Object* o, void* event_info)
-{
-    Evas_Event_Key_Down* ev = (Evas_Event_Key_Down*)event_info;
-    Evas_Object* choicebox = evas_object_name_find(e, "choicebox");
-
-    if(!strcmp(ev->keyname, "Escape"))
-        ecore_main_loop_quit();
-
-    choicebox_aux_key_down_handler(choicebox, ev);
+    ecore_main_loop_quit();
 }
 
 static void run(languages_t* languages)
 {
+    keys_t* keys = keys_alloc("language-selector");
+
    ecore_event_handler_add(ECORE_EVENT_SIGNAL_EXIT, exit_handler, NULL);
 
    Ecore_Evas* main_win = ecore_evas_software_x11_new(0, 0, 0, 0, 600, 800);
@@ -118,23 +104,37 @@ static void run(languages_t* languages)
    evas_object_resize(main_edje, 600, 800);
    evas_object_show(main_edje);
 
-   Evas_Object* choicebox = choicebox_new(main_canvas, "/usr/share/echoicebox/echoicebox.edj",
-                                          "full", item_handler,
-                                          draw_handler, page_handler, languages);
+   choicebox_info_t info = {
+       NULL,
+       "/usr/share/choicebox/choicebox.edj",
+       "full",
+       "/usr/share/choicebox/choicebox.edj",
+       "item-default",
+       item_handler,
+       draw_handler,
+       page_handler,
+       close_handler,
+   };
+
+   Evas_Object* choicebox = choicebox_new(main_canvas, &info, languages);
+
    choicebox_set_size(choicebox, languages->n);
    evas_object_name_set(choicebox, "choicebox");
    edje_object_part_swallow(main_edje, "contents", choicebox);
    evas_object_show(choicebox);
 
-   evas_object_focus_set(main_edje, true);
-   evas_object_event_callback_add(main_edje, EVAS_CALLBACK_KEY_DOWN, &key_down, NULL);
+   evas_object_focus_set(choicebox, true);
+   choicebox_aux_subscribe_key_up(choicebox);
 
-   ecore_evas_callback_resize_set(main_win, main_win_resize_handler);
+   ecore_evas_object_associate(main_win, main_edje, 0);
+
    ecore_evas_show(main_win);
 
    ecore_x_io_error_handler_set(exit_app, NULL);
 
    ecore_main_loop_begin();
+
+   keys_free(keys);
 }
 
 int main(int argc, char** argv)
