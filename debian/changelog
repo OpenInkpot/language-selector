@@ -1,3 +1,10 @@
+language-selector (0.2-1) asimov; urgency=low
+
+  * Use newer libchoicebox
+  * Makefiles cleanup
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Sun, 30 Aug 2009 05:06:30 +0700
+
 language-selector (0.1-10) asimov; urgency=low
 
   * Stop packaging /usr/share/language-selector, it is not used anymore.
