@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        if ! [ -x /etc/X11/Xsession.d/10language-selector ]; then
+           chmod +x /etc/X11/Xsession.d/10language-selector
+        fi
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
