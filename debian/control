@@ -5,7 +5,7 @@ Build-Depends: debhelper (>= 7), automake, pkg-config, libecore-dev, libevas-dev
 XCS-Cross-Host-Build-Depends: debhelper (>= 7), automake, pkg-config
 XCS-Cross-Build-Depends: libecore-dev, libevas-dev, libedje-dev, libchoicebox-dev, liblanguage-dev, libeoi-dev
 Priority: optional
-Standards-Version: 3.8.0
+Standards-Version: 3.8.3
 
 Package: language-selector
 Priority: optional
