@@ -13,8 +13,8 @@
 #include <Edje.h>
 
 #include <libchoicebox.h>
-#include <language.h>
-#include <eoi.h>
+#include <liblanguage.h>
+#include <libeoi.h>
 
 static void die(const char* fmt, ...)
 {
@@ -72,7 +72,7 @@ static void item_handler(Evas_Object* choicebox, int item_num, bool is_alt,
     languages_t* languages = param;
     language_t* lang = languages->langs + item_num;
 
-    set_language(languages, lang->internal_name);
+    languages_set(languages, lang->internal_name);
 
     ecore_main_loop_quit();
 }
@@ -144,11 +144,13 @@ int main(int argc, char** argv)
     if(!edje_init())
         die("Unable to initialize Edje\n");
 
-    languages_t* languages = get_supported_languages();
+    languages_t* languages = languages_get_supported();
     if(!languages)
         die("Unable to obtain languages list.\n");
 
     run(languages);
+
+    languages_free(languages);
 
     edje_shutdown();
     ecore_evas_shutdown();
