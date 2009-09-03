@@ -1,3 +1,21 @@
+language-selector (0.2-4) asimov; urgency=low
+
+  * Adjust to new liblanguage and libeoi
+  * Use --as-needed to drop unused dependencies
+  * Cleanups in autogen.sh and debian/rules:
+  * Bump Standards-Version.
+  * Use --std=gnu99 instead of --std=c99
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Thu, 03 Sep 2009 07:02:55 +0700
+
+language-selector (0.2-3) asimov; urgency=low
+
+  * liblanguage and libeoi transition:
+    - adjust B-D and pkg-config dependencies,
+    - adapt to new liblanguage AI.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Thu, 03 Sep 2009 04:09:02 +0700
+
 language-selector (0.2-2) asimov; urgency=low
 
   * Brown-paper-bag release: make /etc/X11/Xession.d snippet executable.
