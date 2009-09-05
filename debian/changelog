@@ -1,3 +1,9 @@
+language-selector (0.2-4) asimov; urgency=low
+
+  * Added support for choicebox 'hinting'.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Sun, 06 Sep 2009 02:41:48 +0700
+
 language-selector (0.2-3) asimov; urgency=low
 
   * Adjust to new liblanguage and libeoi
