@@ -166,8 +166,8 @@ static void run(languages_t* languages)
 
 int main(int argc, char** argv)
 {
-    if(!evas_init())
-        die("Unable to initialize Evas\n");
+    if(!ecore_x_init(NULL))
+        die("Unable to initialize Ecore_X, maybe missing DISPLAY\n");
     if(!ecore_init())
         die("Unable to initialize Ecore\n");
     if(!ecore_evas_init())
@@ -186,6 +186,6 @@ int main(int argc, char** argv)
     edje_shutdown();
     ecore_evas_shutdown();
     ecore_shutdown();
-    evas_shutdown();
+    ecore_x_shutdown();
     return 0;
 }
