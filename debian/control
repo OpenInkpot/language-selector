@@ -12,4 +12,18 @@ Priority: optional
 Architecture: any
 Depends: ${shlibs:Depends}, liblanguage-data, x11-common, locales
 Description: GUI for language selection for OpenInkpot
- Selects language for user for OpenInkpot
+ This tool provides a user with a menu for selecting language
+ upon first OpenInkpot startup
+
+Package: language-selector-dbg
+Priority: optional
+Architecture: any
+Section: debug
+Depends: language-selector (= ${binary:Version})
+Description: GUI for language selection for OpenInkpot -- debug
+ This tool provides a user with a menu for selecting language
+ upon first OpenInkpot startup
+ .
+ This package contains debugging information.
+
+
