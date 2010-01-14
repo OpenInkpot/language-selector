@@ -35,30 +35,34 @@
 #include <liblanguage.h>
 #include <libeoi.h>
 
-static int exit_handler(void* param, int ev_type, void* event)
+static int
+exit_handler(void *param, int ev_type, void *event)
 {
     ecore_main_loop_quit();
     return 1;
 }
 
-static void main_win_close_handler(Ecore_Evas* main_win)
+static void
+main_win_close_handler(Ecore_Evas *main_win)
 {
     ecore_main_loop_quit();
 }
 
-static void exit_app(void* param)
+static void
+exit_app(void *param)
 {
     ecore_main_loop_quit();
 }
 
-static void draw_handler(Evas_Object* choicebox, Evas_Object* item,
-                         int item_num, int page_position, void* param)
+static void
+draw_handler(Evas_Object *choicebox, Evas_Object *item,
+             int item_num, int page_position, void *param)
 {
-    languages_t* languages = param;
-    language_t* lang = languages->langs + item_num;
+    languages_t *languages = param;
+    language_t *lang = languages->langs + item_num;
 
-    char* buf;
-    if(lang->native_name)
+    char *buf;
+    if (lang->native_name)
         asprintf(&buf, "%s / %s", lang->native_name, lang->name);
     else
         buf = strdup(lang->name);
@@ -67,55 +71,58 @@ static void draw_handler(Evas_Object* choicebox, Evas_Object* item,
     free(buf);
 }
 
-static void page_handler(Evas_Object* choicebox, int cur_page, int total_pages,
-                         void* param)
+static void
+page_handler(Evas_Object *choicebox, int cur_page, int total_pages, void *param)
 {
-    Evas* canvas = evas_object_evas_get(choicebox);
-    Evas_Object* main_edje = evas_object_name_find(canvas, "main_edje");
+    Evas *canvas = evas_object_evas_get(choicebox);
+    Evas_Object *main_edje = evas_object_name_find(canvas, "main_edje");
 
     choicebox_aux_edje_footer_handler(main_edje, "footer", cur_page, total_pages);
 }
 
-static void item_handler(Evas_Object* choicebox, int item_num, bool is_alt,
-                         void* param)
+static void
+item_handler(Evas_Object *choicebox, int item_num, bool is_alt, void *param)
 {
-    languages_t* languages = param;
-    language_t* lang = languages->langs + item_num;
+    languages_t *languages = param;
+    language_t *lang = languages->langs + item_num;
 
     languages_set(languages, lang->internal_name);
 
     ecore_main_loop_quit();
 }
 
-static void close_handler(Evas_Object* choicebox, void* param)
+static void
+close_handler(Evas_Object *choicebox, void *param)
 {
     ecore_main_loop_quit();
 }
 
-static void resize_handler(Ecore_Evas* window)
+static void
+resize_handler(Ecore_Evas *window)
 {
     int w, h;
     ecore_evas_geometry_get(window, NULL, NULL, &w, &h);
-    Evas* canvas = ecore_evas_get(window);
-    Evas_Object* main_edje = evas_object_name_find(canvas, "main_edje");
+    Evas *canvas = ecore_evas_get(window);
+    Evas_Object *main_edje = evas_object_name_find(canvas, "main_edje");
     evas_object_resize(main_edje, w, h);
 
     eoi_process_resize(window);
 }
 
-static void run(languages_t* languages)
+static void
+run(languages_t *languages)
 {
     ecore_event_handler_add(ECORE_EVENT_SIGNAL_EXIT, exit_handler, NULL);
 
-    Ecore_Evas* main_win = ecore_evas_software_x11_new(0, 0, 0, 0, 600, 800);
+    Ecore_Evas *main_win = ecore_evas_software_x11_new(0, 0, 0, 0, 600, 800);
     ecore_evas_title_set(main_win, "Language Selector");
     ecore_evas_name_class_set(main_win, "language-selector", "language-selector");
 
-    Evas* main_canvas = ecore_evas_get(main_win);
+    Evas *main_canvas = ecore_evas_get(main_win);
 
     ecore_evas_callback_delete_request_set(main_win, main_win_close_handler);
 
-    Evas_Object* main_edje = eoi_main_window_create(main_canvas);
+    Evas_Object *main_edje = eoi_main_window_create(main_canvas);
 
     evas_object_name_set(main_edje, "main_edje");
     edje_object_part_text_set(main_edje, "title", "Select language");
@@ -135,7 +142,7 @@ static void run(languages_t* languages)
         close_handler,
     };
 
-    Evas_Object* choicebox = choicebox_new(main_canvas, &info, languages);
+    Evas_Object *choicebox = choicebox_new(main_canvas, &info, languages);
 
     choicebox_set_size(choicebox, languages->n);
     evas_object_name_set(choicebox, "choicebox");
@@ -156,19 +163,19 @@ static void run(languages_t* languages)
     ecore_main_loop_begin();
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-    if(!ecore_x_init(NULL))
+    if (!ecore_x_init(NULL))
         errx(1, "Unable to initialize Ecore_X, maybe missing DISPLAY");
-    if(!ecore_init())
+    if (!ecore_init())
         errx(1, "Unable to initialize Ecore");
-    if(!ecore_evas_init())
+    if (!ecore_evas_init())
         errx(1, "Unable to initialize Ecore_Evas");
-    if(!edje_init())
+    if (!edje_init())
         errx(1, "Unable to initialize Edje\n");
 
-    languages_t* languages = languages_get_supported();
-    if(!languages)
+    languages_t *languages = languages_get_supported();
+    if (!languages)
         errx(1, "Unable to obtain languages list.");
 
     run(languages);
