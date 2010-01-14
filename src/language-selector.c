@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <err.h>
 
 #include <Ecore.h>
 #include <Ecore_Evas.h>
@@ -33,15 +34,6 @@
 #include <libchoicebox.h>
 #include <liblanguage.h>
 #include <libeoi.h>
-
-static void die(const char* fmt, ...)
-{
-    va_list ap;
-    va_start(ap, fmt);
-    vfprintf(stderr, fmt, ap);
-    va_end(ap);
-    exit(EXIT_FAILURE);
-}
 
 static int exit_handler(void* param, int ev_type, void* event)
 {
@@ -167,17 +159,17 @@ static void run(languages_t* languages)
 int main(int argc, char** argv)
 {
     if(!ecore_x_init(NULL))
-        die("Unable to initialize Ecore_X, maybe missing DISPLAY\n");
+        errx(1, "Unable to initialize Ecore_X, maybe missing DISPLAY");
     if(!ecore_init())
-        die("Unable to initialize Ecore\n");
+        errx(1, "Unable to initialize Ecore");
     if(!ecore_evas_init())
-        die("Unable to initialize Ecore_Evas\n");
+        errx(1, "Unable to initialize Ecore_Evas");
     if(!edje_init())
-        die("Unable to initialize Edje\n");
+        errx(1, "Unable to initialize Edje\n");
 
     languages_t* languages = languages_get_supported();
     if(!languages)
-        die("Unable to obtain languages list.\n");
+        errx(1, "Unable to obtain languages list.");
 
     run(languages);
 
