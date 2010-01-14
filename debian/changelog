@@ -1,3 +1,12 @@
+language-selector (0.2.6) zelazny; urgency=low
+
+  * Copyright information updated
+  * Packaging cleanup
+  * -dbg package introduced
+  * Ecore_X initialization errors handling added
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Thu, 14 Jan 2010 11:50:23 +0600
+
 language-selector (0.2.5) zelazny; urgency=low
 
   * Rebuild due to EFL update.
