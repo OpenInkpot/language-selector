@@ -98,18 +98,6 @@ close_handler(Evas_Object *choicebox, void *param)
 }
 
 static void
-resize_handler(Ecore_Evas *window)
-{
-    int w, h;
-    ecore_evas_geometry_get(window, NULL, NULL, &w, &h);
-    Evas *canvas = ecore_evas_get(window);
-    Evas_Object *main_edje = evas_object_name_find(canvas, "main_edje");
-    evas_object_resize(main_edje, w, h);
-
-    eoi_process_resize(window);
-}
-
-static void
 run(languages_t *languages)
 {
     ecore_event_handler_add(ECORE_EVENT_SIGNAL_EXIT, exit_handler, NULL);
@@ -132,9 +120,9 @@ run(languages_t *languages)
 
     choicebox_info_t info = {
         NULL,
-        "/usr/share/choicebox/choicebox.edj",
+        "choicebox",
         "full",
-        "/usr/share/choicebox/choicebox.edj",
+        "choicebox.edj",
         "item-default",
         item_handler,
         draw_handler,
@@ -154,7 +142,7 @@ run(languages_t *languages)
     evas_object_focus_set(choicebox, true);
     choicebox_aux_subscribe_key_up(choicebox);
 
-    ecore_evas_callback_resize_set(main_win, resize_handler);
+    eoi_fullwindow_object_register(main_win, main_edje);
 
     ecore_evas_show(main_win);
 
