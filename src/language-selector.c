@@ -122,7 +122,7 @@ run(languages_t *languages)
         NULL,
         "choicebox",
         "full",
-        "choicebox.edj",
+        "choicebox",
         "item-default",
         item_handler,
         draw_handler,
