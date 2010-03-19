@@ -170,8 +170,8 @@ int main(int argc, char **argv)
 
     languages_free(languages);
 
-    edje_shutdown();
     ecore_evas_shutdown();
+    edje_shutdown();
     ecore_shutdown();
     ecore_x_shutdown();
     return 0;
