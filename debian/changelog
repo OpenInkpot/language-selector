@@ -1,3 +1,11 @@
+language-selector (0.2.8) zelazny; urgency=low
+
+  * Fixed problem with broken theming introduced in 0.2.7
+  * Fixed segfault on shutdown
+  * Adjusted build-depends to drop obsolete libchoicebox-dev.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Fri, 19 Mar 2010 21:13:32 +0600
+
 language-selector (0.2.7) zelazny; urgency=low
 
   * Adjust to libeoi 0.3
