@@ -1,3 +1,9 @@
+language-selector (0.2.10) zelazny; urgency=low
+
+  * Use 8bpp engine
+
+ -- Alexander Kerner <lunohod@openinkpot.org>  Thu, 19 Aug 2010 09:44:23 +0200
+
 language-selector (0.2.9) zelazny; urgency=low
 
   * Adjustment to new ecore API
