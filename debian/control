@@ -1,9 +1,9 @@
 Source: language-selector
 Section: gui
 Maintainer: Mikhail Gusarov <dottedmag@dottedmag.net>
-Build-Depends: debhelper (>= 7), automake, pkg-config, libecore-dev, libevas-dev, libedje-dev, liblanguage-dev, libeoi-dev (>= 0.3)
+Build-Depends: debhelper (>= 7), automake, pkg-config, libecore-dev (>= 0.9.9.49898-5), libevas-dev, libedje-dev, liblanguage-dev, libeoi-dev (>= 0.3)
 XCS-Cross-Host-Build-Depends: debhelper (>= 7), automake, pkg-config
-XCS-Cross-Build-Depends: libecore-dev, libevas-dev, libedje-dev, liblanguage-dev, libeoi-dev (>= 0.3)
+XCS-Cross-Build-Depends: libecore-dev (>= 0.9.9.49898-5), libevas-dev, libedje-dev, liblanguage-dev, libeoi-dev (>= 0.3)
 Priority: optional
 Standards-Version: 3.8.3
 
