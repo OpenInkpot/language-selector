@@ -100,9 +100,13 @@ close_handler(Evas_Object *choicebox, void *param)
 static void
 run(languages_t *languages)
 {
+    int width, height;
+    Ecore_X_Screen *screen = ecore_x_default_screen_get();
+
+    ecore_x_screen_size_get(screen, &width, &height);
     ecore_event_handler_add(ECORE_EVENT_SIGNAL_EXIT, exit_handler, NULL);
 
-    Ecore_Evas *main_win = ecore_evas_software_x11_8_new(0, 0, 0, 0, 600, 800);
+    Ecore_Evas *main_win = ecore_evas_software_x11_8_new(0, 0, 0, 0, width, height);
     ecore_evas_title_set(main_win, "Language Selector");
     ecore_evas_name_class_set(main_win, "language-selector", "language-selector");
 
@@ -115,7 +119,7 @@ run(languages_t *languages)
     evas_object_name_set(main_edje, "main_edje");
     edje_object_part_text_set(main_edje, "title", "Select language");
     evas_object_move(main_edje, 0, 0);
-    evas_object_resize(main_edje, 600, 800);
+    evas_object_resize(main_edje, width, height);
     evas_object_show(main_edje);
 
     choicebox_info_t info = {
