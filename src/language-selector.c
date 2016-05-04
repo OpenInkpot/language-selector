@@ -28,7 +28,6 @@
 
 #include <Ecore.h>
 #include <Ecore_Evas.h>
-#include <Ecore_X.h>
 #include <Edje.h>
 
 #include <libchoicebox.h>
@@ -44,12 +43,6 @@ exit_handler(void *param, int ev_type, void *event)
 
 static void
 main_win_close_handler(Ecore_Evas *main_win)
-{
-    ecore_main_loop_quit();
-}
-
-static void
-exit_app(void *param)
 {
     ecore_main_loop_quit();
 }
@@ -101,12 +94,12 @@ static void
 run(languages_t *languages)
 {
     int width, height;
-    Ecore_X_Screen *screen = ecore_x_default_screen_get();
 
-    ecore_x_screen_size_get(screen, &width, &height);
     ecore_event_handler_add(ECORE_EVENT_SIGNAL_EXIT, exit_handler, NULL);
 
-    Ecore_Evas *main_win = ecore_evas_software_x11_8_new(0, 0, 0, 0, width, height);
+    Ecore_Evas *main_win = ecore_evas_new(NULL, 0, 0, 1, 1, NULL);
+    ecore_evas_screen_geometry_get(main_win, NULL, NULL, &width, &height);
+    ecore_evas_resize(main_win, width, height);
     ecore_evas_title_set(main_win, "Language Selector");
     ecore_evas_name_class_set(main_win, "language-selector", "language-selector");
 
@@ -150,17 +143,11 @@ run(languages_t *languages)
 
     ecore_evas_show(main_win);
 
-    ecore_x_io_error_handler_set(exit_app, NULL);
-
     ecore_main_loop_begin();
 }
 
 int main(int argc, char **argv)
 {
-    if (!ecore_x_init(NULL))
-        errx(1, "Unable to initialize Ecore_X, maybe missing DISPLAY");
-    if (!ecore_init())
-        errx(1, "Unable to initialize Ecore");
     if (!ecore_evas_init())
         errx(1, "Unable to initialize Ecore_Evas");
     if (!edje_init())
@@ -176,7 +163,5 @@ int main(int argc, char **argv)
 
     ecore_evas_shutdown();
     edje_shutdown();
-    ecore_shutdown();
-    ecore_x_shutdown();
     return 0;
 }

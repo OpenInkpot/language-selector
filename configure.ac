@@ -7,7 +7,7 @@ AC_PROG_CC
 
 PKG_PROG_PKG_CONFIG
 
-PKG_CHECK_MODULES(EFL,[ecore ecore-file ecore-evas evas edje])
+PKG_CHECK_MODULES(EFL,[ecore ecore-file ecore-evas evas edje luajit])
 PKG_CHECK_MODULES(OI,[libchoicebox liblanguage libeoi])
 
 AC_OUTPUT(Makefile src/Makefile)
